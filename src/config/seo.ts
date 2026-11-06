@@ -6,7 +6,7 @@ import { SOCIAL_IMAGES } from './site';
 
 export const SITE_ORIGIN = `https://${t.site.domain}`;
 
-/** Staging builds: set PUBLIC_CANONICAL_ORIGIN at build time; sitemap URLs still use SITE_ORIGIN. */
+/** Prefer PUBLIC_CANONICAL_ORIGIN at build time (must match astro.config `site` for sitemap <loc>). */
 function resolveCanonicalOrigin(): string {
   const fromEnv = import.meta.env.PUBLIC_CANONICAL_ORIGIN as string | undefined;
   if (fromEnv?.startsWith('http')) return fromEnv.replace(/\/$/, '');

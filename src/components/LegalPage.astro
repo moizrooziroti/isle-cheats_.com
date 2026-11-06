@@ -10,9 +10,12 @@ interface Props {
   description: string;
   breadcrumbLabel: string;
   sections: { heading: string; paragraphs: string[] }[];
+  /** Overrides visible H1 when title is reserved for schema/JSON-LD */
+  pageHeading?: string;
 }
 
-const { title, description, breadcrumbLabel, sections } = Astro.props;
+const { title, description, breadcrumbLabel, sections, pageHeading } = Astro.props;
+const heading = pageHeading ?? title;
 ---
 
 <article class="py-8 md:py-12">
@@ -26,7 +29,7 @@ const { title, description, breadcrumbLabel, sections } = Astro.props;
     />
     </div>
     <header class="mt-4 space-y-4 text-center">
-      <h1 class="text-3xl font-bold normal-case md:text-4xl">{title}</h1>
+      <h1 class="text-3xl font-bold normal-case md:text-4xl">{heading}</h1>
       <p class="text-lg leading-relaxed text-muted-foreground">{description}</p>
     </header>
 

@@ -73,7 +73,7 @@ import {
   Zap,
 } from '@lucide/astro';
 
-type IconComponent = (props: Record<string, unknown>) => any;
+type IconComponent = typeof ArrowRight;
 
 export const iconRegistry: Record<IconName, IconComponent> = {
   arrowRight: ArrowRight,

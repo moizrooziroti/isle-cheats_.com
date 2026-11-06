@@ -28,6 +28,7 @@ export function formatPlanPrice(usd: number): string {
 }
 
 /** Plan selection is display-only. Checkout stays on the product CTA. */
-export function checkoutUrlWithPlan(baseUrl: string, _planId: ProductPlanId): string {
+export function checkoutUrlWithPlan(baseUrl: string, planId: ProductPlanId): string {
+  void planId;
   return baseUrl;
 }

@@ -8,6 +8,10 @@ type Props = Partial<import("astro/types").ComponentProps<typeof AstroImage>> & 
 };
 
 const { class: className, src, alt = "", inferSize = true, ...rest } = Astro.props;
+// Astro's Image typings expect inferSize omitted (default) or exactly false; avoid `true`.
+/* eslint-disable @typescript-eslint/no-explicit-any -- rest mirrors upstream Image API */
+const extra = rest as any;
+/* eslint-enable @typescript-eslint/no-explicit-any */
 ---
 
 {
@@ -16,8 +20,8 @@ const { class: className, src, alt = "", inferSize = true, ...rest } = Astro.pro
       class={image({ class: className })}
       src={src}
       alt={alt}
-      inferSize={inferSize}
-      {...(rest as any)}
+      {...(!inferSize ? { inferSize: false } : {})}
+      {...extra}
       data-slot="image"
     />
   )

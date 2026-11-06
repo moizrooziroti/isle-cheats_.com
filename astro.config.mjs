@@ -3,8 +3,14 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import { sitemapSerialize } from './src/config/sitemap.ts';
 
+const site =
+  typeof process.env.PUBLIC_CANONICAL_ORIGIN === 'string' &&
+  process.env.PUBLIC_CANONICAL_ORIGIN.startsWith('http')
+    ? process.env.PUBLIC_CANONICAL_ORIGIN.replace(/\/$/, '')
+    : 'https://isle-cheats.com';
+
 export default defineConfig({
-  site: 'https://isle-cheats.com',
+  site,
   trailingSlash: 'always',
   redirects: {
     '/cheats/': '/products/',
@@ -30,10 +36,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     define: {
-      'import.meta.env.PUBLIC_CANONICAL_ORIGIN': JSON.stringify(
-        process.env.PUBLIC_CANONICAL_ORIGIN ??
-          'https://isle-cheats-com.moizrooziroti.workers.dev',
-      ),
+      'import.meta.env.PUBLIC_CANONICAL_ORIGIN': JSON.stringify(site),
     },
     build: {
       cssMinify: true,

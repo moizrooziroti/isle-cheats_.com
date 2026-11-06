@@ -4,6 +4,11 @@ import path from 'node:path';
 const root = process.cwd();
 const dist = path.join(root, 'dist');
 
+const SITEMAP_ORIGIN = (() => {
+  const raw = process.env.PUBLIC_CANONICAL_ORIGIN ?? 'https://isle-cheats.com';
+  return raw.startsWith('http') ? raw.replace(/\/$/, '') : 'https://isle-cheats.com';
+})();
+
 /** @returns {{ source: string, outDir: string }} */
 function resolveSitemapPaths() {
   const candidates = [
@@ -57,7 +62,7 @@ fs.writeFileSync(path.join(outDir, 'sitemap.xml'), formatted, 'utf8');
 const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
-    <loc>https://isle-cheats.com/sitemap.xml</loc>
+    <loc>${SITEMAP_ORIGIN}/sitemap.xml</loc>
     <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
   </sitemap>
 </sitemapindex>
@@ -67,3 +72,17 @@ fs.writeFileSync(source, formatted, 'utf8');
 
 const relOut = path.relative(root, path.join(outDir, 'sitemap.xml'));
 console.log(`Sitemap finalized: ${urlCount} URLs → ${relOut}`);
+
+const robotsBody = `User-agent: *
+Allow: /
+
+Disallow: /go/
+
+Sitemap: https://isle-cheats.com/sitemap.xml
+Sitemap: ${SITEMAP_ORIGIN}/sitemap.xml
+Sitemap: /sitemap.xml
+
+# RSS: https://isle-cheats.com/rss.xml
+`;
+fs.writeFileSync(path.join(dist, 'robots.txt'), robotsBody, 'utf8');
+console.log(`dist/robots.txt written (Sitemap includes ${SITEMAP_ORIGIN})`);

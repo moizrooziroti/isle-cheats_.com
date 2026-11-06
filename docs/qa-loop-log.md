@@ -24,3 +24,19 @@ Status: **Loop not complete** — two consecutive full passes not achieved (iter
 
 Status: FAILURES
 
+## Iteration 1
+
+| Gate | Result |
+| --- | --- |
+| G1-BUILD | FAIL |
+
+Status: FAILURES
+
+## Iteration 1
+
+| Gate | Result |
+| --- | --- |
+| G1-BUILD | FAIL |
+
+Status: FAILURES
+

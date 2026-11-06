@@ -14,7 +14,7 @@ const s = t.cheats;
     <SectionHeader eyebrow={s.eyebrow} title={s.title} desc={s.subtitle} titleId="cheats-title" />
 
     <div class="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-      {cheatPages.map((cheat, i) => (
+      {cheatPages.map((cheat) => (
         <CatalogCard
           label={cheat.tier ?? cheat.name}
           title={cheat.title}

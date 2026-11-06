@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@eslint/js": "^10.0.1",
     "@lhci/cli": "^0.16.0",
     "@playwright/test": "^1.65.0",
     "eslint": "^10.14.0",
@@ -43,6 +44,7 @@
     "linkinator": "^8.1.0",
     "playwright": "^1.65.0",
     "typescript": "^5.9.2",
+    "typescript-eslint": "^8.72.1",
     "wrangler": "^4.158.0"
   }
 }

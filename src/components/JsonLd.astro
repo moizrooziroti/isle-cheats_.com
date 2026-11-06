@@ -11,7 +11,8 @@ const payload =
     : {
         '@context': 'https://schema.org',
         '@graph': graphs.map((entry) => {
-          const { '@context': _ignored, ...rest } = entry;
+          const rest = { ...entry } as Record<string, unknown>;
+          delete rest['@context'];
           return rest;
         }),
       };

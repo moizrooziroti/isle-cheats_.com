@@ -29,7 +29,7 @@ const sourceTimestamp = (path?: string) => {
       <header class="forum-hero">
         <div>
           <p class="section-header__eyebrow">The Isle community forum</p>
-          <h1>The Isle cheat community forum — THE ISLE CHEATS</h1>
+          <h1>Forum — community discussions on The Isle | THE CHEATS</h1>
           <p class="forum-hero__copy">
             Sample discussions compiled from our guides — searchable threads on The Isle ESP setup, EVRIMA survival, HWID utilities, patch-day status, and checkout tips (not live user accounts).
           </p>
@@ -41,10 +41,10 @@ const sourceTimestamp = (path?: string) => {
         <h2 class="text-lg font-semibold normal-case text-foreground">Forum: What you can ask here</h2>
         <p>
           Search threads on player ESP, dinosaur awareness, patch-day status, and checkout before you buy. Many answers link to blog guides and the{' '}
-          <a href="/products/the-isle-cheats/" class="text-primary hover:underline">THE ISLE CHEATS</a>{' '}
-          product page plus utilities on the{' '}
-          <a href="/products/" class="text-primary hover:underline">products hub</a>. See also the{' '}
-          <a href="/faq/" class="text-primary hover:underline">FAQ</a>.
+          <a href="/products/the-isle-cheats/" class="text-primary hover:underline">main ESP suite detail page</a>{' '}
+          plus utilities on the{' '}
+          <a href="/products/" class="text-primary hover:underline">full product catalog</a>. See also the{' '}
+          <a href="/faq/" class="text-primary hover:underline">help FAQ</a>.
         </p>
         <h3 class="text-base font-semibold normal-case text-foreground">Product links</h3>
         <p>
@@ -106,7 +106,7 @@ const sourceTimestamp = (path?: string) => {
                   {post.sourceTitle && <p class="forum-source">Related guide: <a href={post.sourcePath}>{post.sourceTitle}</a></p>}
                   <div class="forum-post-actions">
                     <a href={`/forum/${post.slug}/`}><Icon name="messageCircle" size={15} /> {post.commentsCount} comments</a>
-                    <a href={`/forum/${post.slug}/`}><Icon name="arrowRight" size={15} /> Read discussion</a>
+                    <a href={`/forum/${post.slug}/`}><Icon name="arrowRight" size={15} /> Open full thread</a>
                   </div>
                 </div>
               </article>
@@ -128,20 +128,20 @@ const sourceTimestamp = (path?: string) => {
               <div class="forum-about__title"><span class="forum-community-avatar forum-community-avatar--brand"><img src={SITE_MEDIA.logo} alt="The Isle cheat logo for isle-cheats.com forum" width="34" height="34" /></span><h2>Forum: The Isle Cheats Community</h2></div>
               <p>A home for The Isle players comparing the Isle cheat setup, utilities, and survival strategies — with links to verified product pages.</p>
               <div class="forum-stats"><span><b>{forumPosts.length}</b> discussions</span><span><b>{forumCategories.length}</b> topics</span></div>
-              <a class="forum-join" href="/blog/">Explore all guides</a>
+              <a class="forum-join" href="/blog/">Browse the guide index</a>
             </div>
           </section>
           <section class="forum-side-card" id="communities">
-            <h2 class="forum-side-heading">Communities</h2>
+            <h3 class="forum-side-heading">Communities</h3>
             <ul class="forum-community-list">
-              {forumCategories.map((category, index) => (
+              {forumCategories.map((category) => (
                 <li><a href={`/forum/?category=${categoryKey(category.name)}`}><span class={`forum-community-avatar tone-${category.tone}`} aria-hidden="true"><Icon name={category.icon} size={15} /></span><span><b>{category.name}</b><small>Browse related Q&amp;A</small></span><Icon name="chevronRight" size={15} /></a></li>
               ))}
             </ul>
             <a class="forum-text-link" href="#communities">Browse all communities <Icon name="arrowRight" size={14} /></a>
           </section>
           <section class="forum-side-card forum-rules">
-            <h2 class="forum-side-heading">Community guidelines</h2>
+            <h3 class="forum-side-heading">Community guidelines</h3>
             <ol><li>Keep it friendly and constructive</li><li>Stay on topic and add context</li><li>Mark spoilers and sensitive content</li></ol>
             <a href="#community-guidelines">Read the full guidelines <Icon name="arrowRight" size={14} /></a>
           </section>

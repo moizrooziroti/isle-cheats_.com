@@ -60,10 +60,12 @@ const robotsContent = noindex
     <script is:inline>
       (function () {
         try {
-          var stored = localStorage.getItem('colorTheme') || localStorage.getItem('starwind-theme');
+          const stored = localStorage.getItem('colorTheme') || localStorage.getItem('starwind-theme');
           if (stored === 'light') document.documentElement.classList.remove('dark');
           else if (stored === 'dark') document.documentElement.classList.add('dark');
-        } catch (e) {}
+        } catch {
+          /* localStorage may be unavailable */
+        }
         document.documentElement.classList.add('fonts-pending');
       })();
     </script>
@@ -164,9 +166,11 @@ const robotsContent = noindex
               if (window.__gaLoaded) return;
               window.__gaLoaded = true;
               window.dataLayer = window.dataLayer || [];
+              /* eslint-disable prefer-rest-params -- gtag queue matches the official snippet */
               function gtag() {
                 dataLayer.push(arguments);
               }
+              /* eslint-enable prefer-rest-params */
               gtag('js', new Date());
               gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
               const s = document.createElement('script');

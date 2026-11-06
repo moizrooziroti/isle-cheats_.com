@@ -29,7 +29,7 @@ const buttonClassName = sidebarMenuButton({ variant, size, class: className });
 ---
 
 {
-  Boolean(tooltip) ? (
+  tooltip ? (
     <Tooltip openDelay={0} closeDelay={0} class="w-full">
       <TooltipTrigger class="w-full">
         <SidebarPrimitive.MenuButton asChild={true}>

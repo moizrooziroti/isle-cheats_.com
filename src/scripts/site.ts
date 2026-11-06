@@ -20,15 +20,12 @@ function initNavHighlight() {
   document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]').forEach((link) => {
     const href = link.getAttribute('href') ?? '';
     const linkPath = href.replace(/\/index\.html$/, '').replace(/\/$/, '') || '/';
-    let isActive = false;
-
-    if (linkPath === '/support') {
-      isActive = path === '/support' || path === '/contact';
-    } else if (linkPath === '/') {
-      isActive = path === '/';
-    } else {
-      isActive = path === linkPath || path.startsWith(`${linkPath}/`);
-    }
+    const isActive =
+      linkPath === '/support'
+        ? path === '/support' || path === '/contact'
+        : linkPath === '/'
+          ? path === '/'
+          : path === linkPath || path.startsWith(`${linkPath}/`);
 
     link.classList.toggle('is-active', isActive);
     if (isActive) {

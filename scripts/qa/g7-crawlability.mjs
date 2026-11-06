@@ -3,18 +3,50 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
+import https from 'node:https';
 import { DIST, ROOT, failGate, passGate, readText, walkDir } from './lib.mjs';
 
-const BASE = process.env.QA_BASE_URL ?? 'http://127.0.0.1:3000';
+const envOrigin = process.env.PUBLIC_CANONICAL_ORIGIN;
+
+let expectedOrigin = 'https://isle-cheats.com';
+if (envOrigin?.startsWith('http')) {
+  expectedOrigin = envOrigin.replace(/\/$/, '');
+} else if (process.env.QA_BASE_URL) {
+  try {
+    expectedOrigin = new URL(process.env.QA_BASE_URL).origin;
+  } catch {
+    /* keep default */
+  }
+}
+
+/** Base URL for HTTP fetches: local preview server, or same as sitemap origin when canonical is set. */
+const BASE =
+  process.env.QA_BASE_URL?.trim() ||
+  (envOrigin?.startsWith('http') ? expectedOrigin : 'http://127.0.0.1:3000');
+
 const failures = [];
 
-const robots = readText(path.join(ROOT, 'public', 'robots.txt'));
-if (!robots.includes('Sitemap: https://isle-cheats.com/sitemap.xml')) failures.push('robots missing sitemap');
+const robotsPath = fs.existsSync(path.join(DIST, 'robots.txt'))
+  ? path.join(DIST, 'robots.txt')
+  : path.join(ROOT, 'public', 'robots.txt');
+const robots = readText(robotsPath);
+const robotsHasPrimarySitemap =
+  robots.includes(`Sitemap: ${expectedOrigin}/sitemap.xml`) ||
+  robots.includes('Sitemap: https://isle-cheats.com/sitemap.xml');
+if (!robotsHasPrimarySitemap) failures.push('robots missing sitemap line for expected origin');
 if (/Disallow:\s*\/\s*$/m.test(robots)) failures.push('robots blocks entire site');
 
+function getUrl(pathname) {
+  const base = BASE.endsWith('/') ? BASE.slice(0, -1) : BASE;
+  const path = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  return `${base}${path}`;
+}
+
 async function fetch(pathname) {
+  const url = getUrl(pathname);
+  const client = url.startsWith('https:') ? https : http;
   return new Promise((resolve, reject) => {
-    http.get(`${BASE}${pathname}`, (res) => {
+    client.get(url, (res) => {
       let body = '';
       res.on('data', (d) => (body += d));
       res.on('end', () => resolve({ status: res.statusCode, body }));
@@ -22,7 +54,9 @@ async function fetch(pathname) {
   });
 }
 
-const sitemapFiles = ['sitemap-index.xml', 'sitemap-0.xml'].map((f) => path.join(DIST, f)).filter(fs.existsSync);
+const sitemapFiles = ['sitemap.xml', 'sitemap-index.xml', 'sitemap-0.xml']
+  .map((f) => path.join(DIST, f))
+  .filter(fs.existsSync);
 if (!sitemapFiles.length) failures.push('no sitemap in dist');
 
 let urls = [];
@@ -32,8 +66,9 @@ for (const sf of sitemapFiles) {
 }
 
 for (const url of urls) {
-  if (!url.startsWith('https://isle-cheats.com/')) failures.push(`sitemap non-prod URL: ${url}`);
-  if (url.includes('/forum/')) failures.push(`forum in sitemap: ${url}`);
+  if (!url.startsWith(`${expectedOrigin}/`) && url !== `${expectedOrigin}`) {
+    failures.push(`sitemap URL wrong origin (expected ${expectedOrigin}): ${url}`);
+  }
   try {
     const pathname = new URL(url).pathname;
     const local = await fetch(pathname);

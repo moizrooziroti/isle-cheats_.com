@@ -40,17 +40,17 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
       'UGC Account recovery — appeal notes and workflows for THE ISLE CHEATS customers.',
   },
   '/blog/': {
-    title: 'Guides – THE ISLE CHEATS ESP and setup | THE ISLE CHEATS',
+    title: 'Guides – THE ISLE CHEATS ESP and setup | THE',
     description:
       'Guides for EVRIMA ESP, buying THE ISLE CHEATS, and getting the most from your overlay. Patch-day tips and setup articles for PC.',
   },
   '/forum/': {
-    title: 'Forum – Community discussions on The Isle | THE ISLE CHEATS',
+    title: 'Forum – Community discussions on The Isle | THE CHEATS',
     description:
       'Forum: Community discussions on The Isle ESP, EVRIMA survival, HWID utilities, patch-day status, and safe checkout on isle-cheats.com.',
   },
   '/faq/': {
-    title: 'Faq – Answers about THE ISLE CHEATS | THE ISLE CHEATS',
+    title: 'Faq – Answers about THE ISLE CHEATS | THE',
     description:
       'Faq: Answers about THE ISLE CHEATS products, ESP, utilities, and partner checkout. Help center for pricing, safety, and blog topics.',
   },
@@ -70,7 +70,7 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
       'Privacy Policy: How isle-cheats.com uses analytics, cookies, and support messages. Payment data stays on the checkout partner.',
   },
   '/about/': {
-    title: 'Isle Cheats Com – About THE ISLE CHEATS | THE ISLE CHEATS',
+    title: 'Isle Cheats Com – About THE | THE',
     description:
       'Isle Cheats Com: About THE ISLE CHEATS. Independent PC listings and guides. Not the official game, publisher, or anti-cheat vendor.',
   },

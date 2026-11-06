@@ -1,7 +1,6 @@
 import type { SitemapItem } from '@astrojs/sitemap';
 import { blogPosts } from '../data/blog';
 import { INDEXED_BLOG_SLUGS } from '../data/blog/indexedSlugs';
-import { SITE_URL } from './site';
 import { parseBlogDate } from '../utils/schema';
 
 const indexedBlogPaths = new Set(INDEXED_BLOG_SLUGS.map((slug) => `/blog/${slug}/`));
@@ -20,12 +19,7 @@ function pathnameFromUrl(url: string): string {
 export function sitemapSerialize(item: SitemapItem): SitemapItem | undefined {
   const path = pathnameFromUrl(item.url);
 
-  if (
-    path.includes('/404') ||
-    path.startsWith('/go/') ||
-    path.startsWith('/forum/') ||
-    path.includes('/rss.xml')
-  ) {
+  if (path.includes('/404') || path.startsWith('/go/') || path.includes('/rss.xml')) {
     return undefined;
   }
 
@@ -33,8 +27,8 @@ export function sitemapSerialize(item: SitemapItem): SitemapItem | undefined {
     return undefined;
   }
 
-  const canonical = new URL(path, SITE_URL);
-  item.url = canonical.href;
+  const origin = new URL(item.url).origin;
+  item.url = new URL(path, `${origin}/`).href;
 
   item.lastmod = buildDate;
 
@@ -63,10 +57,16 @@ export function sitemapSerialize(item: SitemapItem): SitemapItem | undefined {
     path === '/about/' ||
     path === '/support/' ||
     path === '/privacy/' ||
+    path === '/privacy-policy/' ||
     path === '/terms/' ||
     path === '/faq/'
   ) {
     item.priority = 0.5;
+    return item;
+  }
+
+  if (path === '/forum/') {
+    item.priority = 0.6;
     return item;
   }
 
