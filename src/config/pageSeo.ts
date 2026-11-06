@@ -10,12 +10,12 @@ export interface PageSeoEntry {
 
 export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/': {
-    title: 'THE ISLE CHEAT | PC Survival Tools',
+    title: 'The Isle Cheats – PC Survival Tools | THE ISLE CHEATS',
     description:
-      'THE ISLE CHEATS for PC: player ESP, dinosaur ESP, Cloud DMA, and utilities with verified partner checkout.',
+      'The Isle Cheats for PC: player ESP, dinosaur ESP, Cloud DMA, and utilities with verified partner checkout. Four survival tools on one catalog.',
   },
   '/products/': {
-    title: 'THE ISLE CHEATS products | Four PC tools',
+    title: 'Products – Each card has its own checkout | THE ISLE CHEATS',
     description:
       'Four THE ISLE CHEATS products on one page. Each card has its own checkout link and the price listed on the partner page.',
   },
@@ -40,19 +40,19 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
       'UGC Account recovery — appeal notes and workflows for THE ISLE CHEATS customers.',
   },
   '/blog/': {
-    title: 'THE ISLE CHEATS guides | ESP and setup',
+    title: 'Guides – THE ISLE CHEATS ESP and setup | THE ISLE CHEATS',
     description:
-      'Guides for EVRIMA ESP, buying THE ISLE CHEATS, and getting the most from your overlay.',
+      'Guides for EVRIMA ESP, buying THE ISLE CHEATS, and getting the most from your overlay. Patch-day tips and setup articles for PC.',
   },
   '/forum/': {
-    title: 'The Isle cheat community forum | THE ISLE CHEATS',
+    title: 'Forum – Community discussions on The Isle | THE ISLE CHEATS',
     description:
-      'Community discussions on The Isle ESP, EVRIMA survival, HWID utilities, patch-day status, and safe checkout on isle-cheats.com.',
+      'Forum: Community discussions on The Isle ESP, EVRIMA survival, HWID utilities, patch-day status, and safe checkout on isle-cheats.com.',
   },
   '/faq/': {
-    title: 'FAQ | THE ISLE CHEATS products',
+    title: 'Faq – Answers about THE ISLE CHEATS | THE ISLE CHEATS',
     description:
-      'Answers about THE ISLE CHEATS products, ESP, utilities, and partner checkout.',
+      'Faq: Answers about THE ISLE CHEATS products, ESP, utilities, and partner checkout. Help center for pricing, safety, and blog topics.',
   },
   '/terms/': {
     title: 'Terms | THE ISLE CHEATS',
@@ -65,14 +65,14 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
       'How isle-cheats.com uses analytics, cookies, and support messages. Payment data stays on the checkout partner.',
   },
   '/privacy-policy/': {
-    title: 'Privacy Policy | THE ISLE CHEATS',
+    title: 'Privacy Policy – How isle-cheats.com uses data | THE ISLE CHEATS',
     description:
-      'How isle-cheats.com uses analytics, cookies, and support messages. Payment data stays on the checkout partner.',
+      'Privacy Policy: How isle-cheats.com uses analytics, cookies, and support messages. Payment data stays on the checkout partner.',
   },
   '/about/': {
-    title: 'About | THE ISLE CHEATS',
+    title: 'Isle Cheats Com – About THE ISLE CHEATS | THE ISLE CHEATS',
     description:
-      'About THE ISLE CHEATS. Independent PC listings and guides. Not the official game, publisher, or anti-cheat vendor.',
+      'Isle Cheats Com: About THE ISLE CHEATS. Independent PC listings and guides. Not the official game, publisher, or anti-cheat vendor.',
   },
   '/support/': {
     title: 'Contact | THE ISLE CHEATS',

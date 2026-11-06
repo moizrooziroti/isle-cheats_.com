@@ -4,5 +4,6 @@ Allow: /
 Disallow: /go/
 
 Sitemap: https://isle-cheats.com/sitemap.xml
+Sitemap: /sitemap.xml
 
 # RSS: https://isle-cheats.com/rss.xml

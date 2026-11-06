@@ -1,5 +1,5 @@
-# Static Astro site — upload pre-built dist/ only. Do not add [build] or @astrojs/cloudflare
-# (Wrangler auto-config would re-run npm run build with the adapter and break finalize-sitemap).
+# Staging canonical (HTML link rel=canonical). Sitemap URLs stay on isle-cheats.com in src/config/site.ts.
+# Before go-live: set PUBLIC_CANONICAL_ORIGIN=https://isle-cheats.com on the build or change astro.config.mjs default.
 name = "isle-cheats-com"
 compatibility_date = "2025-11-06"
 

@@ -52,7 +52,7 @@
   max-width: 40rem;
   font-size: 0.875rem;
   line-height: 1.6;
-  color: #27272a;
+  color: rgb(115 115 115);
 }
 
 html.dark .section-header__subtitle {
@@ -117,26 +117,6 @@ html::-webkit-scrollbar,
   padding-bottom: 4.5rem;
 }
 
-#hero .hero-bg-dim {
-  background:
-    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(45, 110, 226, 0.18), transparent 65%),
-    linear-gradient(180deg, rgba(14, 18, 24, 0.4) 0%, transparent 55%);
-}
-
-html:not(.dark) #hero .hero-bg-dim {
-  background:
-    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(45, 110, 226, 0.1), transparent 65%),
-    linear-gradient(180deg, rgba(245, 247, 250, 0.4) 0%, transparent 55%);
-}
-
-html:not(.dark) body {
-  color: #0a0a0a;
-}
-
-html:not(.dark) .text-muted-foreground {
-  color: #27272a;
-}
-
 @media (min-width: 768px) {
   #hero {
     padding-top: calc(var(--floating-nav-clearance) + 4rem);
@@ -162,7 +142,7 @@ html.fonts-pending body {
 }
 
 html:not(.dark) .icon-app {
-  color: #18181b;
+  color: var(--muted-foreground);
 }
 
 html:not(.dark) .icon-app.icon-app--primary {
@@ -203,7 +183,7 @@ html:not(.dark) #why-us .why-compare-other-card :hover .icon-app {
   color: var(--muted-foreground);
 }
 
-/* Dark mode — icons stay white by default; allow explicit blue accents */
+/* Dark mode — icons stay white (including primary modifier, hovers, utilities) */
 html.dark .icon-app,
 html.dark .icon-app.icon-app--primary,
 html.dark .icon-app:hover,
@@ -233,13 +213,6 @@ html.dark #why-us .why-compare-other-card .icon-app,
 html.dark #why-us .why-compare-other-card:hover .icon-app,
 html.dark #why-us .why-compare-other-card :hover .icon-app {
   color: #ffffff;
-}
-
-html.dark .text-primary.icon-app,
-html.dark .text-primary .icon-app,
-html.dark [class*='text-primary'] > .icon-app,
-html.dark .icon-app.text-primary {
-  color: #2d6ee2 !important;
 }
 
 :is(a, button)[data-variant='primary']:hover .icon-app,
@@ -272,16 +245,13 @@ html.dark .icon-app.text-primary {
   top: 1rem;
 }
 
-/* Current page in the header and mobile menu. */
+/* Navbar (desktop + mobile sheet): primary on hover only — not when .is-active */
 a.nav-link[data-nav-link].is-active {
-  color: var(--primary);
-  background: color-mix(in oklch, var(--primary) 16%, transparent);
-  font-weight: 600;
+  color: var(--muted-foreground);
 }
 
 a.nav-link[data-nav-link].is-active:hover {
   color: var(--primary);
-  background: color-mix(in oklch, var(--primary) 22%, transparent);
 }
 
 a.nav-link[data-nav-link] .icon-app {
@@ -715,12 +685,12 @@ html:not(.dark) .deployment-step-title {
 }
 
 html:not(.dark) .deployment-cta-secondary {
-  background: #e8ecf4;
+  background: #e8e6e1;
   color: #1a1a1a;
 }
 
 html:not(.dark) .deployment-cta-secondary:hover {
-  background: color-mix(in oklch, #e8ecf4 88%, #000000);
+  background: color-mix(in oklch, #e8e6e1 88%, #000000);
 }
 
 #why-us .why-compare-us-card .why-compare-card-head [data-slot='card-title'],
@@ -776,10 +746,10 @@ html:not(.dark) .deployment-cta-secondary:hover {
 .why-compare-us-card {
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, #2d6ee2 22%, #12161f) 0%,
-    color-mix(in srgb, #2d6ee2 12%, #12161f) 28%,
-    color-mix(in srgb, #2d6ee2 5%, #12161f) 55%,
-    #12161f 100%
+    color-mix(in oklch, var(--primary) 26%, var(--card)) 0%,
+    color-mix(in oklch, var(--primary) 14%, var(--card)) 28%,
+    color-mix(in oklch, var(--primary) 5%, var(--card)) 55%,
+    var(--card) 100%
   );
 }
 
@@ -802,34 +772,14 @@ html:not(.dark) .deployment-cta-secondary:hover {
 
 /* Matches Starwind CardFooter (`bg-muted/50` + border) for card title bands */
 .card-title-band {
-  background: color-mix(in srgb, #161a24 70%, transparent);
+  background: color-mix(in oklch, var(--muted) 50%, transparent);
   border-bottom: 1px solid var(--border);
 }
 
 .card-footer-band {
-  background: color-mix(in srgb, #161a24 70%, transparent);
+  background: color-mix(in oklch, var(--muted) 50%, transparent);
   border-top: 1px solid var(--border);
 }
-
-html:not(.dark) .card-title-band,
-html:not(.dark) .card-footer-band {
-  background: color-mix(in srgb, var(--muted) 50%, transparent);
-}
-
-/* Force cool navy surfaces — kill any warm/purple card casts */
-html.dark,
-html.dark body {
-  background-color: #0b1018;
-}
-
-html.dark .bg-card,
-html.dark [data-slot='card'],
-html.dark [data-sw-card],
-html.dark .features-bento > article {
-  background-color: #121a28 !important;
-  background-image: none !important;
-}
-
 
 @keyframes hero-embla-progress {
   from {

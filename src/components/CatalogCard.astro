@@ -24,8 +24,6 @@ interface Props {
   buyLabel?: string;
   viewLabel?: string;
   maxFeatures?: number;
-  price?: string;
-  priceOnTop?: boolean;
   class?: string;
 }
 
@@ -42,8 +40,6 @@ const {
   buyLabel = 'Buy',
   viewLabel = 'View',
   maxFeatures = 6,
-  price,
-  priceOnTop = false,
   class: className,
 } = Astro.props;
 
@@ -51,7 +47,7 @@ const displayFeatures = features.slice(0, maxFeatures);
 const buyAttrs = buyUrl.startsWith('http')
   ? { rel: 'sponsored noopener nofollow', target: '_blank' }
   : {};
-const featured = variant === 'popular' || priceOnTop;
+const featured = variant === 'popular';
 
 const statusBadgeIcon = (text: string): IconName => {
   if (/limited/i.test(text)) return 'alert';
@@ -67,7 +63,6 @@ const statusBadgeIcon = (text: string): IconName => {
     className,
   ]}
   data-catalog-card
-  data-price-placement={priceOnTop ? 'top' : 'body'}
 >
   {featured && <div class="catalog-card__shine" aria-hidden="true" />}
   <CardHeader class="catalog-card__header space-y-3 pb-2">
@@ -106,24 +101,8 @@ const statusBadgeIcon = (text: string): IconName => {
         }
       </div>
     </div>
-    {
-      price && priceOnTop && (
-        <p class="catalog-card__price catalog-card__price--hero">
-          <span class="catalog-card__price-label">From</span>
-          <span class="catalog-card__price-value">{price}</span>
-        </p>
-      )
-    }
   </CardHeader>
   <CardContent class="catalog-card__content flex-1 pt-0">
-    {
-      price && !priceOnTop && (
-        <p class="catalog-card__price mb-3">
-          <span class="catalog-card__price-label">From</span>
-          <span class="catalog-card__price-value">{price}</span>
-        </p>
-      )
-    }
     <ul class="catalog-card__features space-y-2.5 text-sm leading-snug text-muted-foreground">
       {displayFeatures.map((feature) => (
         <li class="flex items-start gap-2.5">

@@ -25,7 +25,7 @@ export const en: Translations = {
     status: 'The Isle — check status',
     eyebrow: 'THE ISLE CHEATS',
     titleLine1: 'THE ISLE CHEATS',
-    titleLine2: 'Player & dinosaur ESP for EVRIMA',
+    titleLine2: 'PC survival tools — player & dinosaur ESP for EVRIMA',
     subtitle:
       'Four Isle products on one catalog — main ESP suite, hardware utility, Cloud DMA, and UGC tools. Each name links to its product page.',
     ctaPrimary: 'Buy The Isle Cheats',
@@ -294,7 +294,7 @@ export const en: Translations = {
     eyebrow: 'Guides',
     title: 'The Isle cheats guides',
     subtitle: 'ESP setup, Evrima notes, compatibility questions, and EAC patch-day checks.',
-    latestTitle: 'Guides: ESP, Evrima & patch-day tips',
+    latestTitle: 'Guides: THE ISLE CHEATS ESP setup, Evrima & patch-day tips',
     latestSubtitle: 'Filter by topic or sort to find ESP, Evrima, and patch-day guides.',
     filterAll: 'All articles',
     sortLabel: 'Sort by',
@@ -595,7 +595,7 @@ export const en: Translations = {
       ],
     },
     privacy: {
-      title: 'Privacy Policy | The Isle cheat shop',
+      title: 'Privacy Policy | THE ISLE CHEATS',
       description:
         'How isle-cheats.com handles analytics, cookies, and messages when you browse the Isle cheat listings.',
       sections: [

@@ -32,39 +32,6 @@
   overflow-wrap: anywhere;
 }
 
-.catalog-card__price {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.35rem 0.5rem;
-  margin: 0;
-}
-
-.catalog-card__price-label {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted-foreground);
-}
-
-.catalog-card__price-value {
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--primary);
-}
-
-.catalog-card__price--hero .catalog-card__price-value {
-  font-size: 1.375rem;
-}
-
-@media (min-width: 640px) {
-  .catalog-card__price-value {
-    font-size: 1.375rem;
-  }
-}
-
 .catalog-card__features {
   min-height: 0;
 }

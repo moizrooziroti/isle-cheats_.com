@@ -29,6 +29,12 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    define: {
+      'import.meta.env.PUBLIC_CANONICAL_ORIGIN': JSON.stringify(
+        process.env.PUBLIC_CANONICAL_ORIGIN ??
+          'https://isle-cheats-com.moizrooziroti.workers.dev',
+      ),
+    },
     build: {
       cssMinify: true,
       minify: 'esbuild',

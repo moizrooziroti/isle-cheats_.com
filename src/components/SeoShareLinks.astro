@@ -1,0 +1,16 @@
+---
+interface Props {
+  pageUrl: string;
+  pageTitle: string;
+}
+
+const { pageUrl, pageTitle } = Astro.props;
+const encodedUrl = encodeURIComponent(pageUrl);
+const encodedTitle = encodeURIComponent(pageTitle);
+---
+
+<nav class="sr-only" aria-label="Share this page">
+  <a href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}>Share on X</a>
+  <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}>Share on Facebook</a>
+  <a href={`https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`}>Share on Telegram</a>
+</nav>

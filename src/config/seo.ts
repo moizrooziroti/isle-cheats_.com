@@ -6,6 +6,15 @@ import { SOCIAL_IMAGES } from './site';
 
 export const SITE_ORIGIN = `https://${t.site.domain}`;
 
+/** Staging builds: set PUBLIC_CANONICAL_ORIGIN at build time; sitemap URLs still use SITE_ORIGIN. */
+function resolveCanonicalOrigin(): string {
+  const fromEnv = import.meta.env.PUBLIC_CANONICAL_ORIGIN as string | undefined;
+  if (fromEnv?.startsWith('http')) return fromEnv.replace(/\/$/, '');
+  return SITE_ORIGIN;
+}
+
+const CANONICAL_ORIGIN = resolveCanonicalOrigin();
+
 export const DEFAULT_OG_IMAGE = SOCIAL_IMAGES[0];
 
 export const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined;
@@ -31,7 +40,7 @@ export function canonicalUrl(pathname: string): string {
   let path = pathname || '/';
   if (!path.startsWith('/')) path = `/${path}`;
   if (path !== '/' && !path.endsWith('/')) path = `${path}/`;
-  return `${SITE_ORIGIN}${path}`;
+  return `${CANONICAL_ORIGIN}${path}`;
 }
 
 export function absoluteAssetUrl(path: string): string {
@@ -47,6 +56,7 @@ export function resolvePageSeo(pathname: string): { title: string; description: 
 }
 
 export function pageTitle(keyword: string, brand = t.site.name): string {
+  if (keyword.includes('|')) return keyword.trim();
   const suffix = ` | ${brand}`;
   const max = 60;
   if (`${keyword}${suffix}`.length <= max) return `${keyword}${suffix}`;

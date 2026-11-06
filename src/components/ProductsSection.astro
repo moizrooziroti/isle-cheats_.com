@@ -6,7 +6,6 @@ import { cheatTierIcons, productCategoryIcons } from '../data/sectionIcons';
 import SectionHeader from './SectionHeader.astro';
 import CatalogCard from './CatalogCard.astro';
 import { productPath } from '../utils/path';
-import { formatPlanPrice, getProductPlans } from '../data/productPricing';
 import {
   Carousel,
   CarouselContent,
@@ -63,7 +62,6 @@ function cardLabel(product: (typeof productPages)[number]) {
                       variant={product.variant}
                       buyLabel="Buy now"
                       viewLabel="View details"
-                      price={getProductPlans(product.slug).map((plan) => formatPlanPrice(plan.priceUsd)).join(' / ')}
                       maxFeatures={5}
                     />
                   </CarouselItem>
