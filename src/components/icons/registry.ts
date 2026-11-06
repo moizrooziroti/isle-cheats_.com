@@ -2,7 +2,7 @@
  * Single source of truth: IconName → Lucide Astro component (tree-shaken imports).
  * Brand labels use closest Lucide metaphors (no brand logos in Lucide).
  */
-import type { AstroComponent } from 'astro/types';
+import type { IconName } from './types';
 import {
   Activity,
   AppWindow,
@@ -73,9 +73,9 @@ import {
   Zap,
 } from '@lucide/astro';
 
-import type { IconName } from './types';
+type IconComponent = (props: Record<string, unknown>) => any;
 
-export const iconRegistry: Record<IconName, AstroComponent> = {
+export const iconRegistry: Record<IconName, IconComponent> = {
   arrowRight: ArrowRight,
   arrowUpRight: ArrowUpRight,
   chevronLeft: ChevronLeft,

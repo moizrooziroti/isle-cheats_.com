@@ -19,7 +19,7 @@ const sourceTimestamp = (path?: string) => {
 };
 ---
 
-<BaseLayout noindex title={seo.title} description={seo.description} jsonLd={[
+<BaseLayout title={seo.title} description={seo.description} jsonLd={[
   collectionPageSchema({ name: 'The Isle Cheats Community Forum', description: seo.description, url: '/forum/' }),
   breadcrumbSchema(breadcrumbs),
 ]}>
@@ -31,7 +31,7 @@ const sourceTimestamp = (path?: string) => {
           <p class="section-header__eyebrow">The Isle community forum</p>
           <h1>The Isle cheat community forum</h1>
           <p class="forum-hero__copy">
-            Practical threads on the Isle cheat setup, ESP configuration, HWID recovery, patch-day status, and survival builds — grounded in our published guides.
+            Sample discussions compiled from our guides — searchable threads on The Isle ESP setup, EVRIMA survival, HWID utilities, patch-day status, and checkout tips (not live user accounts).
           </p>
         </div>
         <a class="forum-create" href="/blog/"><Icon name="messageCircle" size={17} /> Explore the guides</a>
@@ -40,7 +40,10 @@ const sourceTimestamp = (path?: string) => {
       <div class="prose prose-sm dark:prose-invert mb-10 max-w-3xl text-muted-foreground">
         <h2 class="text-lg font-semibold normal-case text-foreground">Forum: What you can ask here</h2>
         <p>
-          Discussions tie back to blog guides on player ESP, dinosaur awareness, Easy Anti-Cheat patch checks, and Cloud DMA requirements. Search before you post — many loader and checkout questions are already answered on the{' '}
+          Search threads on player ESP, dinosaur awareness, patch-day status, and checkout before you buy. Many answers link to blog guides and the{' '}
+          <a href="/products/the-isle-cheats/" class="text-primary hover:underline">THE ISLE CHEATS</a>{' '}
+          product page plus utilities on the{' '}
+          <a href="/products/" class="text-primary hover:underline">products hub</a>. See also the{' '}
           <a href="/faq/" class="text-primary hover:underline">FAQ</a>.
         </p>
         <h3 class="text-base font-semibold normal-case text-foreground">Product links</h3>
@@ -81,7 +84,7 @@ const sourceTimestamp = (path?: string) => {
               <button type="button" data-forum-filter={categoryKey(category.name)} aria-pressed="false"><Icon name={category.icon} size={14} /> {category.name}</button>
             ))}
           </div>
-          <p class="forum-results-count" data-forum-visible-count>{forumPosts.length} guide discussions</p>
+          <p class="forum-results-count" data-forum-visible-count>{forumPosts.length} discussions</p>
 
           <div class="forum-post-list" aria-live="polite">
             {forumPosts.map((post, index) => (
@@ -95,14 +98,13 @@ const sourceTimestamp = (path?: string) => {
                   <div class="forum-post-meta">
                     <span class={`forum-community-avatar tone-${post.categoryTone}`}><Icon name="users" size={15} /></span>
                     <a href="#communities" class="forum-community-name">d/{post.category.toLowerCase().replaceAll(' ', '')}</a>
-                    <span>·</span><span><Icon name="userRound" size={13} /> The Isle Cheats guide team</span><span>Guide-based Q&amp;A</span>
+                    <span>·</span><span><Icon name="userRound" size={13} /> u/{post.author}</span><span>·</span><span>{post.age}</span>
+                    {post.flair && <span class={`forum-flair tone-${post.categoryTone}`}>{post.flair}</span>}
                   </div>
                   <a class="forum-post-title" href={`/forum/${post.slug}/`}>{post.title}</a>
-                  <img src={post.image} alt="The Isle feature menu screenshot" width="640" height="360" loading="lazy" decoding="async" class="mt-2 aspect-video w-full rounded-md object-cover" />
                   <p class="forum-post-excerpt">{post.excerpt}</p>
-                  {post.sourceTitle && <p class="forum-source">From the guide: <a href={post.sourcePath}>{post.sourceTitle}</a></p>}
+                  {post.sourceTitle && <p class="forum-source">Related guide: <a href={post.sourcePath}>{post.sourceTitle}</a></p>}
                   <div class="forum-post-actions">
-                    {post.flair && <span class={`forum-flair tone-${post.categoryTone}`}>{post.flair}</span>}
                     <a href={`/forum/${post.slug}/`}><Icon name="messageCircle" size={15} /> {post.commentsCount} comments</a>
                     <a href={`/forum/${post.slug}/`}><Icon name="arrowRight" size={15} /> Read discussion</a>
                   </div>
@@ -125,7 +127,7 @@ const sourceTimestamp = (path?: string) => {
             <div class="forum-about__content">
               <div class="forum-about__title"><span class="forum-community-avatar forum-community-avatar--brand"><img src={SITE_MEDIA.logo} alt="The Isle cheat logo for isle-cheats.com forum" width="34" height="34" /></span><h2>Forum: The Isle Cheats Community</h2></div>
               <p>A home for The Isle players comparing the Isle cheat setup, utilities, and survival strategies — with links to verified product pages.</p>
-              <div class="forum-stats"><span><b>{forumPosts.length}</b> guide discussions</span><span><b>{forumCategories.length}</b> topics</span></div>
+              <div class="forum-stats"><span><b>{forumPosts.length}</b> discussions</span><span><b>{forumCategories.length}</b> topics</span></div>
               <a class="forum-join" href="/blog/">Explore all guides</a>
             </div>
           </section>

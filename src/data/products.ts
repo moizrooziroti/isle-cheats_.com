@@ -283,7 +283,7 @@ const productContent: Record<
       title: 'UGC Tools',
       paragraphs: [
         'Account recovery workspace for building custom appeal workflows and automating restriction disputes on supported platforms (vendor description).',
-        'Check live product status before purchase. Checkout uses the Zadeyo partner store at /products/ugc.',
+        'Check live product status before purchase. Checkout uses the partner store linked from this page.',
       ],
     },
   },

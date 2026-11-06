@@ -45,9 +45,9 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
       'Guides for EVRIMA ESP, buying THE ISLE CHEATS, and getting the most from your overlay.',
   },
   '/forum/': {
-    title: 'THE ISLE CHEATS forum guides',
+    title: 'The Isle cheat community forum | THE ISLE CHEATS',
     description:
-      'Editorial setup and troubleshooting guides for THE ISLE CHEATS. These threads are not customer reviews.',
+      'Community discussions on The Isle ESP, EVRIMA survival, HWID utilities, patch-day status, and safe checkout on isle-cheats.com.',
   },
   '/faq/': {
     title: 'FAQ | THE ISLE CHEATS products',

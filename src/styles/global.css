@@ -881,6 +881,7 @@ html.dark .features-bento > article {
   text-transform: uppercase;
   box-shadow: -3px 4px 18px rgb(0 0 0 / 0.16);
   cursor: pointer;
+  animation: buy-prompt-tab-wiggle 3.2s ease-in-out infinite;
 }
 
 .buy-prompt__tab-dot {
@@ -898,6 +899,46 @@ html.dark .features-bento > article {
   }
   100% {
     box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes buy-prompt-tab-wiggle {
+  0%,
+  88%,
+  100% {
+    transform: translateX(0);
+  }
+  90% {
+    transform: translateX(-4px);
+  }
+  94% {
+    transform: translateX(-1px);
+  }
+}
+
+@keyframes buy-prompt-cta-glow {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 4px 14px color-mix(in oklch, var(--primary) 45%, transparent),
+      0 0 0 0 color-mix(in oklch, var(--primary) 35%, transparent);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.04);
+    box-shadow:
+      0 8px 22px color-mix(in oklch, var(--primary) 55%, transparent),
+      0 0 0 4px color-mix(in oklch, var(--primary) 22%, transparent);
+  }
+}
+
+@keyframes buy-prompt-cta-shimmer {
+  0% {
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  45%,
+  100% {
+    transform: translateX(220%) skewX(-12deg);
   }
 }
 
@@ -983,30 +1024,80 @@ html.dark .features-bento > article {
 }
 
 .buy-prompt__cta {
+  position: relative;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
+  overflow: hidden;
   border-radius: 0.5rem;
   background: var(--primary);
   color: var(--primary-foreground);
-  padding: 0.5rem 0.65rem;
-  font-size: 0.75rem;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 4px 14px color-mix(in oklch, var(--primary) 45%, transparent);
+  animation: buy-prompt-cta-glow 2.2s ease-in-out infinite;
+}
+
+.buy-prompt__cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgb(255 255 255 / 0.35) 50%,
+    transparent 65%
+  );
+  animation: buy-prompt-cta-shimmer 2.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .buy-prompt__cta:hover {
   filter: brightness(1.07);
+  animation-play-state: paused;
+}
+
+.buy-prompt__cta-label {
+  position: relative;
+  z-index: 1;
+}
+
+.buy-prompt__cta svg {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 480px) {
+  .buy-prompt {
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    padding-inline: 0.5rem;
+  }
+
+  .buy-prompt__panel {
+    width: min(100%, 19rem);
+  }
+
+  .buy-prompt__tab {
+    right: 0;
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .buy-prompt__panel {
     transition: none;
   }
-  .buy-prompt__tab-dot {
-    animation: none;
+
+  .buy-prompt__tab-dot,
+  .buy-prompt__tab,
+  .buy-prompt__cta,
+  .buy-prompt__cta::after {
+    animation: none !important;
   }
 }

@@ -1,5 +1,90 @@
 @import './product-experience-section.css';
 
+/* Catalog card — product grid & carousel */
+.catalog-card__shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0 auto auto 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--primary) 85%, white),
+    transparent
+  );
+}
+
+.catalog-card--featured {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 6%, var(--card)) 0%,
+    var(--card) 42%
+  );
+}
+
+.catalog-card__header {
+  padding-bottom: 0.75rem;
+}
+
+.catalog-card__title a {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.catalog-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+  margin: 0;
+}
+
+.catalog-card__price-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.catalog-card__price-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--primary);
+}
+
+.catalog-card__price--hero .catalog-card__price-value {
+  font-size: 1.375rem;
+}
+
+@media (min-width: 640px) {
+  .catalog-card__price-value {
+    font-size: 1.375rem;
+  }
+}
+
+.catalog-card__features {
+  min-height: 0;
+}
+
+.catalog-card__footer {
+  padding-top: 1rem;
+}
+
+.catalog-card__buy:active {
+  transform: scale(0.98);
+}
+
+.catalog-card--carousel {
+  border-color: color-mix(in oklch, var(--border) 90%, transparent);
+}
+
+.catalog-card--carousel .catalog-card__footer {
+  padding-bottom: 0.25rem;
+}
+
 /* Catalog card — compact badges under title */
 .catalog-card__badge {
   padding: 0.125rem 0.5rem;
@@ -159,8 +244,6 @@
 .catalog-card--carousel [data-slot='card-footer'] {
   padding-top: 0.75rem;
 }
-
-/* Product detail — centered layout at all breakpoints */
 .product-detail .section-header,
 .product-detail .section-header--wide,
 .product-detail .deployment-header {

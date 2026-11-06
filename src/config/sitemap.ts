@@ -8,7 +8,7 @@ const indexedBlogPaths = new Set(INDEXED_BLOG_SLUGS.map((slug) => `/blog/${slug}
 
 const buildDate = new Date().toISOString();
 
-const blogLastmod = new Map(
+const blogLastmod = new Map<string, string>(
   blogPosts.map((post) => [`/blog/${post.slug}/`, parseBlogDate(post.date)] as const),
 );
 
@@ -25,7 +25,6 @@ export function sitemapSerialize(item: SitemapItem): SitemapItem | undefined {
     path.startsWith('/go/') ||
     path.startsWith('/forum/') ||
     path.includes('/rss.xml') ||
-    path.includes('fortnite') ||
     path.startsWith('/products/fortnite-cheats')
   ) {
     return undefined;
@@ -42,38 +41,22 @@ export function sitemapSerialize(item: SitemapItem): SitemapItem | undefined {
 
   if (path === '/') {
     item.priority = 1;
-    item.changefreq = 'weekly';
     return item;
   }
 
   if (path === '/blog/') {
     item.priority = 0.9;
-    item.changefreq = 'weekly';
-    return item;
-  }
-
-  if (path === '/forum/') {
-    item.priority = 0.8;
-    item.changefreq = 'daily';
-    return item;
-  }
-
-  if (path.startsWith('/forum/')) {
-    item.priority = 0.6;
-    item.changefreq = 'weekly';
     return item;
   }
 
   if (path.startsWith('/blog/')) {
     item.priority = 0.7;
-    item.changefreq = 'monthly';
     item.lastmod = blogLastmod.get(path) ?? buildDate;
     return item;
   }
 
   if (path.startsWith('/products/')) {
     item.priority = 0.8;
-    item.changefreq = 'weekly';
     return item;
   }
 
@@ -85,11 +68,9 @@ export function sitemapSerialize(item: SitemapItem): SitemapItem | undefined {
     path === '/faq/'
   ) {
     item.priority = 0.5;
-    item.changefreq = 'yearly';
     return item;
   }
 
   item.priority = 0.6;
-  item.changefreq = 'monthly';
   return item;
 }

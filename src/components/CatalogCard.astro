@@ -51,6 +51,7 @@ const displayFeatures = features.slice(0, maxFeatures);
 const buyAttrs = buyUrl.startsWith('http')
   ? { rel: 'sponsored noopener nofollow', target: '_blank' }
   : {};
+const featured = variant === 'popular' || priceOnTop;
 
 const statusBadgeIcon = (text: string): IconName => {
   if (/limited/i.test(text)) return 'alert';
@@ -59,66 +60,97 @@ const statusBadgeIcon = (text: string): IconName => {
 };
 ---
 
-<Card class:list={['group flex h-full flex-col transition-shadow hover:shadow-md hover:shadow-primary/20', className]}>
-  <CardHeader class="space-y-2.5">
-    <Button as="a" href={buyUrl} variant="primary" size="sm" class="w-full" {...buyAttrs}>
-      {buyLabel}
-      <Icon name="arrowRight" size={17} />
-    </Button>
-    {price && priceOnTop && <p class="text-2xl font-bold text-primary">{price}</p>}
-    <CardTitle class="text-base normal-case leading-snug sm:text-lg">
-      <a href={href} class="hover:text-primary">{title}</a>
-    </CardTitle>
-    <div class="catalog-card__badges flex flex-wrap items-center gap-1.5">
-      <Badge tone="primary" appearance="outline" size="sm" class="catalog-card__badge gap-1">
-        <Icon name={icon} size={12} class="shrink-0" />
-        {label}
-      </Badge>
-      {
-        badge && (
-          <Badge
-            tone="primary"
-            appearance="soft"
-            size="sm"
-            class="catalog-card__badge gap-1"
-          >
-            <Icon name={statusBadgeIcon(badge)} size={12} class="shrink-0" />
-            {badge}
-          </Badge>
-        )
-      }
-      {variant === 'popular' && (
-        <Badge tone="primary" appearance="solid" size="sm" class="catalog-card__badge gap-1">
-          <Icon name="zap" size={12} class="shrink-0" />
-          Popular
+<Card
+  class:list={[
+    'catalog-card group relative flex h-full flex-col overflow-hidden border-border/80 bg-card/95 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-lg hover:shadow-primary/10',
+    featured && 'catalog-card--featured ring-1 ring-primary/25',
+    className,
+  ]}
+  data-catalog-card
+  data-price-placement={priceOnTop ? 'top' : 'body'}
+>
+  {featured && <div class="catalog-card__shine" aria-hidden="true" />}
+  <CardHeader class="catalog-card__header space-y-3 pb-2">
+    <div class="flex min-w-0 flex-col gap-2">
+      <CardTitle class="catalog-card__title text-base font-bold normal-case leading-snug tracking-tight sm:text-lg">
+        <a href={href} class="text-foreground transition-colors hover:text-primary">
+          {title}
+        </a>
+      </CardTitle>
+      <div class="catalog-card__badges flex flex-wrap items-center gap-1.5">
+        <Badge tone="primary" appearance="outline" size="sm" class="catalog-card__badge gap-1">
+          <Icon name={icon} size={12} class="shrink-0" />
+          {label}
         </Badge>
-      )}
-      {
-        variant === 'limited' && !badge?.toLowerCase().includes('limited') && (
-          <Badge tone="primary" appearance="outline" size="sm" class="catalog-card__badge gap-1">
-            <Icon name="alert" size={12} class="shrink-0" />
-            Limited
+        {
+          badge && (
+            <Badge tone="primary" appearance="soft" size="sm" class="catalog-card__badge gap-1">
+              <Icon name={statusBadgeIcon(badge)} size={12} class="shrink-0" />
+              {badge}
+            </Badge>
+          )
+        }
+        {variant === 'popular' && (
+          <Badge tone="primary" appearance="solid" size="sm" class="catalog-card__badge gap-1">
+            <Icon name="zap" size={12} class="shrink-0" />
+            Best seller
           </Badge>
-        )
-      }
+        )}
+        {
+          variant === 'limited' && !badge?.toLowerCase().includes('limited') && (
+            <Badge tone="primary" appearance="outline" size="sm" class="catalog-card__badge gap-1">
+              <Icon name="alert" size={12} class="shrink-0" />
+              Limited
+            </Badge>
+          )
+        }
+      </div>
     </div>
+    {
+      price && priceOnTop && (
+        <p class="catalog-card__price catalog-card__price--hero">
+          <span class="catalog-card__price-label">From</span>
+          <span class="catalog-card__price-value">{price}</span>
+        </p>
+      )
+    }
   </CardHeader>
-  <CardContent class="flex-1">
-    {price && !priceOnTop && <p class="mb-3 text-xl font-bold text-primary">{price}</p>}
-    <ul class="space-y-2 text-sm text-muted-foreground">
+  <CardContent class="catalog-card__content flex-1 pt-0">
+    {
+      price && !priceOnTop && (
+        <p class="catalog-card__price mb-3">
+          <span class="catalog-card__price-label">From</span>
+          <span class="catalog-card__price-value">{price}</span>
+        </p>
+      )
+    }
+    <ul class="catalog-card__features space-y-2.5 text-sm leading-snug text-muted-foreground">
       {displayFeatures.map((feature) => (
-        <li class="flex items-start gap-2">
-          <Icon name="check" size={14} class="mt-0.5 shrink-0" />
+        <li class="flex items-start gap-2.5">
+          <span class="catalog-card__check mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/12 text-primary">
+            <Icon name="check" size={10} />
+          </span>
           <span>{feature}</span>
         </li>
       ))}
-      {more > 0 && <li class="text-xs text-muted-foreground">+{more} more features</li>}
+      {more > 0 && <li class="text-xs text-muted-foreground/90">+{more} more on the product page</li>}
     </ul>
   </CardContent>
-  <CardFooter class="mt-auto flex flex-col gap-2">
-    <Button as="a" href={href} variant="outline" size="sm" class="w-full">
+  <CardFooter class="catalog-card__footer mt-auto flex flex-col gap-2 border-t border-border/60 bg-muted/20 pt-4">
+    <Button
+      as="a"
+      href={buyUrl}
+      variant="primary"
+      size="sm"
+      class="catalog-card__buy w-full font-semibold shadow-md shadow-primary/25"
+      {...buyAttrs}
+    >
+      {buyLabel}
+      <Icon name="arrowRight" size={17} aria-hidden="true" />
+    </Button>
+    <Button as="a" href={href} variant="ghost" size="sm" class="catalog-card__view w-full text-muted-foreground hover:text-foreground">
       {viewLabel}
-      <Icon name="arrowRight" size={17} />
+      <Icon name="arrowRight" size={16} aria-hidden="true" />
     </Button>
   </CardFooter>
 </Card>
