@@ -4,9 +4,10 @@ import path from 'node:path';
 const root = process.cwd();
 const dist = path.join(root, 'dist');
 
+const DEFAULT_ORIGIN = 'https://isle-cheats.com';
 const SITEMAP_ORIGIN = (() => {
-  const raw = process.env.PUBLIC_CANONICAL_ORIGIN ?? 'https://isle-cheats.com';
-  return raw.startsWith('http') ? raw.replace(/\/$/, '') : 'https://isle-cheats.com';
+  const raw = process.env.PUBLIC_CANONICAL_ORIGIN ?? DEFAULT_ORIGIN;
+  return raw.startsWith('http') ? raw.replace(/\/$/, '') : DEFAULT_ORIGIN;
 })();
 
 /** @returns {{ source: string, outDir: string }} */
@@ -78,11 +79,7 @@ Allow: /
 
 Disallow: /go/
 
-Sitemap: https://isle-cheats.com/sitemap.xml
 Sitemap: ${SITEMAP_ORIGIN}/sitemap.xml
-Sitemap: /sitemap.xml
-
-# RSS: https://isle-cheats.com/rss.xml
 `;
 fs.writeFileSync(path.join(dist, 'robots.txt'), robotsBody, 'utf8');
 console.log(`dist/robots.txt written (Sitemap includes ${SITEMAP_ORIGIN})`);

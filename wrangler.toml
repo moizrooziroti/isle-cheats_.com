@@ -1,5 +1,4 @@
-# Staging canonical (HTML link rel=canonical). Sitemap URLs stay on isle-cheats.com in src/config/site.ts.
-# Before go-live: set PUBLIC_CANONICAL_ORIGIN=https://isle-cheats.com on the build or change astro.config.mjs default.
+# Default build uses https://isle-cheats.com. For *.workers.dev use: npm run build:workers
 name = "isle-cheats-com"
 compatibility_date = "2025-11-06"
 

@@ -2,6 +2,16 @@
 
 You verify the domain at your DNS provider—no HTML meta tags in the repo.
 
+## Build for production (canonical + sitemap)
+
+The default **`npm run build`** uses `https://isle-cheats.com` for canonicals, `hreflang`, sitemap `<loc>`, and `dist/robots.txt`.
+
+- **Staging on Workers:** `npm run build:workers` (sets `PUBLIC_CANONICAL_ORIGIN` to your `*.workers.dev` URL).
+- **CI override:** set `PUBLIC_CANONICAL_ORIGIN` if you deploy to a different host.
+- **Reference:** see [`.env.production.example`](../.env.production.example).
+
+Then deploy `dist/` (e.g. `npx wrangler deploy`).
+
 ## Setup (once)
 
 1. Open [Google Search Console](https://search.google.com/search-console) and add the **domain** property for `isle-cheats.com` if it is not already there.

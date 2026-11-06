@@ -29,11 +29,39 @@ function link(text: string, href: string): string {
   return `<a href="${normalizeInternalPath(href)}">${text}</a>`;
 }
 
-const mainCheat = link('The Isle Cheats', productPath('the-isle-cheats'));
-const productsHub = link('The Isle products', ROUTES.products);
-const hwid = link('HWID Spoofer', productPath('hwid-spoofer'));
-const cloudDma = link('Cloud DMA', productPath('cloud-dma'));
-const ugc = link('UGC Tools', productPath('ugc'));
+/** Same destinations need distinct anchor text for internal-link audits. */
+const mainCheat = link('THE ISLE CHEATS suite page', productPath('the-isle-cheats'));
+const mainCheatEspList = link('vendor ESP modules listing', productPath('the-isle-cheats'));
+const mainCheatFeatures = link('THE ISLE CHEATS feature list', productPath('the-isle-cheats'));
+const mainCheatPrimary = link('primary ESP suite checkout', productPath('the-isle-cheats'));
+const mainCheatLicense = link('suite license page', productPath('the-isle-cheats'));
+const mainCheatPortal = link('operator portal entry', productPath('the-isle-cheats'));
+const mainCheatVendorEsp = link('ESP product documentation', productPath('the-isle-cheats'));
+const mainCheatCheckout = link('post-checkout portal docs', productPath('the-isle-cheats'));
+const mainCheatArticleEsp = link('ESP suite product page', productPath('the-isle-cheats'));
+const mainCheatArticleDoc = link('suite documentation hub', productPath('the-isle-cheats'));
+
+const productsHub = link('four-product catalog', ROUTES.products);
+const productsHubCompare = link('utilities compare index', ROUTES.products);
+const productsHubIndex = link('product index', ROUTES.products);
+const productsHubVerified = link('verified catalog hub', ROUTES.products);
+
+const hwid = link('HWID Spoofer utility card', productPath('hwid-spoofer'));
+const hwidWhen = link('HWID hardware case page', productPath('hwid-spoofer'));
+const hwidGuide = link('HWID portal guide', productPath('hwid-spoofer'));
+const hwidVsUgc = link('HWID recovery utility', productPath('hwid-spoofer'));
+const hwidBlog = link('HWID product reference', productPath('hwid-spoofer'));
+
+const cloudDma = link('Cloud DMA add-on page', productPath('cloud-dma'));
+const cloudDmaStack = link('Cloud DMA stack requirement', productPath('cloud-dma'));
+const cloudDmaInfra = link('Cloud DMA infrastructure SKU', productPath('cloud-dma'));
+const cloudDmaPartner = link('partner Cloud DMA listing', productPath('cloud-dma'));
+const cloudDmaBlog = link('DMA stack checkout', productPath('cloud-dma'));
+
+const ugc = link('UGC appeal workspace', productPath('ugc'));
+const ugcWhat = link('UGC Tools listing', productPath('ugc'));
+const ugcVsHwid = link('UGC dispute tools', productPath('ugc'));
+const ugcBlog = link('UGC appeal toolkit', productPath('ugc'));
 const faqPage = link('full FAQ', ROUTES.faq);
 const blog = link('blog guides', ROUTES.blog);
 
@@ -85,7 +113,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'esp',
     icon: 'faqWhatIsEsp',
     q: 'What is The Isle ESP?',
-    a: `Player and dinosaur ESP show positions, species, growth, and distance readouts on screen. ${mainCheat} lists the vendor ESP modules for The Isle on PC.`,
+    a: `Player and dinosaur ESP show positions, species, growth, and distance readouts on screen. ${mainCheatEspList} covers the vendor ESP modules for The Isle on PC.`,
     scopes: ['the-isle-cheats'],
   },
   {
@@ -93,14 +121,14 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'esp',
     icon: 'faqEspVsScripts',
     q: 'What ESP features are listed for The Isle?',
-    a: `Vendor docs for ${mainCheat} list player ESP, animal and NPC ESP, species and growth tags, distance readouts, and custom colors. Confirm live status before purchase.`,
+    a: `Vendor docs on ${mainCheatVendorEsp} list player ESP, animal and NPC ESP, species and growth tags, distance readouts, and custom colors. Confirm live status before purchase.`,
   },
   {
     id: 'which-product-main',
     topic: 'plans',
     icon: 'faqWhichTierEsp',
     q: 'Which product is the main The Isle suite?',
-    a: `${mainCheat} is the primary enhancement product. Utilities (${hwid}, ${cloudDma}, ${ugc}) are separate checkouts on ${productsHub}.`,
+    a: `${mainCheatPrimary} is the primary enhancement product. Utilities (${hwid}, ${cloudDma}, ${ugc}) are separate checkouts on ${productsHubCompare}.`,
     scopes: ['the-isle-cheats'],
   },
   {
@@ -108,7 +136,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'products',
     icon: 'faqWhichTierScripts',
     q: 'Is Cloud DMA required?',
-    a: `Partner FAQ states ${cloudDma} is required for full functionality in their stack. It is a one-time lifetime purchase separate from ${mainCheat}.`,
+    a: `Partner FAQ states ${cloudDmaStack} is required for full functionality in their stack. It is a one-time lifetime purchase separate from ${mainCheatLicense}.`,
     scopes: ['cloud-dma'],
   },
   {
@@ -116,7 +144,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'plans',
     icon: 'faqRankTiers',
     q: 'How do I compare products?',
-    a: `Open ${productsHub} for The Isle Cheats plus utilities. Each page lists features, pricing, and checkout links.`,
+    a: `Open ${productsHubVerified} for The Isle Cheats plus utilities. Each page lists features, pricing, and checkout links.`,
   },
   {
     id: 'pricing-verified',
@@ -151,7 +179,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'products',
     icon: 'faqHwidWhen',
     q: 'When do I need the HWID Spoofer?',
-    a: `Use ${hwid} when fresh accounts fail instantly on one PC but work elsewhere—hardware enforcement. Not for account-only EAC cases; see ${ugc} instead.`,
+    a: `Use ${hwidWhen} when fresh accounts fail instantly on one PC but work elsewhere—hardware enforcement. Not for account-only EAC cases; see ${ugcVsHwid} instead.`,
     scopes: ['hwid-spoofer'],
   },
   {
@@ -159,7 +187,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'products',
     icon: 'faqUgcWhat',
     q: 'What is UGC?',
-    a: `${ugc} is an appeal workspace for account restrictions — structured notes and workflows on the partner product page.`,
+    a: `${ugcWhat} is an appeal workspace for account restrictions — structured notes and workflows on the partner product page.`,
     scopes: ['ugc'],
   },
   {
@@ -167,7 +195,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'products',
     icon: 'faqSkinChanger',
     q: 'What does Cloud DMA do?',
-    a: `${cloudDma} is the partner DMA infrastructure layer—required for full stack functionality per vendor FAQ. Checkout is separate from ${mainCheat}.`,
+    a: `${cloudDmaInfra} is the partner DMA infrastructure layer—required for full stack functionality per vendor FAQ. Checkout is separate from ${mainCheatCheckout}.`,
     scopes: ['cloud-dma'],
   },
   {
@@ -175,21 +203,21 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'products',
     icon: 'faqExternalLoader',
     q: 'Is the loader injected into the game folder?',
-    a: `The Isle Cheats runs external with cloud config sync—no files injected into the The Isle directory. EAC risk still applies. See ${productsHub}.`,
+    a: `The Isle Cheats runs external with cloud config sync—no files injected into the The Isle directory. EAC risk still applies. See ${productsHubCompare}.`,
   },
   {
     id: 'blog-vs-cheats',
     topic: 'blog',
     icon: 'faqBlogVsCheats',
     q: 'Do blog guides replace the product pages?',
-    a: `No. Blog posts explain setup and safety; ${mainCheat} and utilities on ${productsHub} are where you start checkout.`,
+    a: `No. Blog posts explain setup and safety; ${mainCheat} and utilities on ${productsHubIndex} are where you start checkout.`,
   },
   {
     id: 'blog-setup',
     topic: 'blog',
     icon: 'faqBlogSetup',
     q: 'Where do blog setup guides point for purchase?',
-    a: `Guides link to product pages and ${productsHub}. Checkout runs through our secure partner—never paste loader files from random Discord DMs.`,
+    a: `Guides link to product pages and ${productsHubVerified}. Checkout runs through our secure partner—never paste loader files from random Discord DMs.`,
   },
   {
     id: 'compare-plans',
@@ -203,7 +231,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'plans',
     icon: 'faqWhoLite',
     q: 'Who should buy The Isle Cheats?',
-    a: `Players who want the vendor-listed ESP suite for The Isle on PC. Add ${cloudDma} when the partner stack requires it.`,
+    a: `Players who want the vendor-listed ESP suite for The Isle on PC. Add ${cloudDmaPartner} when the partner stack requires it.`,
     scopes: ['the-isle-cheats'],
   },
   {
@@ -211,7 +239,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'plans',
     icon: 'faqWhoPro',
     q: 'Who needs HWID Spoofer?',
-    a: `Anyone recovering from hardware-level enforcement before launching games again—follow the ${hwid} portal guide exactly.`,
+    a: `Anyone recovering from hardware-level enforcement before launching games again—follow the ${hwidGuide} exactly.`,
     scopes: ['hwid-spoofer'],
   },
   {
@@ -219,7 +247,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'plans',
     icon: 'faqWhoElite',
     q: 'Who needs UGC Tools?',
-    a: `Users documenting appeals or disputes for account restrictions—not a substitute for ${hwid} on hardware flags.`,
+    a: `Users documenting appeals or disputes for account restrictions—not a substitute for ${hwidVsUgc} on hardware flags.`,
     scopes: ['ugc'],
   },
   {
@@ -248,7 +276,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'esp',
     icon: 'faqZoomHack',
     q: 'Does The Isle Cheats include stream-proof mode?',
-    a: `When the vendor loader offers stream-proof options, test OBS capture locally. Settings live in the operator portal for ${mainCheat}.`,
+    a: `When the vendor loader offers stream-proof options, test OBS capture locally. Settings live in the operator portal for ${mainCheatPortal}.`,
     scopes: ['the-isle-cheats'],
   },
   {
@@ -256,7 +284,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'products',
     icon: 'faqAutoFarm',
     q: 'Why is Cloud DMA listed separately?',
-    a: `${cloudDma} is infrastructure required by the partner stack—not a cosmetic mod. Buy it before expecting every module to load.`,
+    a: `${cloudDmaBlog} is infrastructure required by the partner stack—not a cosmetic mod. Buy it before expecting every module to load.`,
     scopes: ['cloud-dma'],
   },
   {
@@ -357,7 +385,7 @@ const blogTopicFaqs: Record<string, SiteFaqItem[]> = {
       topic: 'blog',
       icon: 'faqBlogGuideTier',
       q: 'Which product matches this guide?',
-      a: `ESP articles → ${mainCheat}. HWID or EAC articles → ${hwid} or ${ugc}. Infrastructure → ${cloudDma}.`,
+      a: `ESP articles → ${mainCheatArticleEsp}. HWID or EAC articles → ${hwidBlog} or ${ugcBlog}. Infrastructure → ${cloudDmaInfra}.`,
     },
     {
       id: 'blog-guide-status',
@@ -400,7 +428,7 @@ const defaultBlogFaqs: SiteFaqItem[] = [
     topic: 'blog',
     icon: 'faqBlogDefault1',
     q: 'Are blog guides official product documentation?',
-    a: `Articles explain workflows and link to ${mainCheat}, utilities, and ${productsHub}. Feature lists on product pages are authoritative for checkout.`,
+    a: `Articles explain workflows and link to ${mainCheatFeatures}, utilities, and ${productsHubCompare}. Feature lists on product pages are authoritative for checkout.`,
   },
   {
     id: 'blog-default-2',
@@ -428,7 +456,7 @@ export function getBlogFaqs(tag: string, slug: string): SiteFaqItem[] {
       topic: 'esp',
       icon: 'faqBlogSlugEsp',
       q: 'Which product covers ESP from this article?',
-      a: `${mainCheat} lists player and dinosaur ESP per the vendor product page.`,
+      a: `${mainCheatArticleEsp} lists player and dinosaur ESP per the vendor product page.`,
     });
   }
   if (slug.includes('external') || slug.includes('loader')) {
@@ -437,7 +465,7 @@ export function getBlogFaqs(tag: string, slug: string): SiteFaqItem[] {
       topic: 'setup',
       icon: 'faqBlogSlugScripts',
       q: 'Where is the loader guide?',
-      a: `Follow the external loader article and portal docs for ${mainCheat} after checkout.`,
+      a: `Follow the external loader article and portal docs for ${mainCheatArticleDoc} after checkout.`,
     });
   }
   if (slug.includes('hwid') || slug.includes('ban') || slug.includes('eac')) {
@@ -446,7 +474,7 @@ export function getBlogFaqs(tag: string, slug: string): SiteFaqItem[] {
       topic: 'products',
       icon: 'faqBlogSlugHwid',
       q: 'Does this article replace HWID or UGC products?',
-      a: `Recovery guides complement ${hwid} and ${ugc}—read product pages for workflow scope and realistic outcomes.`,
+      a: `Recovery guides complement ${hwidWhen} and ${ugcWhat}—read product pages for workflow scope and realistic outcomes.`,
     });
   }
 

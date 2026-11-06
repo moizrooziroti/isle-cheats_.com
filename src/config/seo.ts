@@ -4,16 +4,19 @@ import { getPageSeoEntry } from './pageSeo';
 
 import { SOCIAL_IMAGES } from './site';
 
-export const SITE_ORIGIN = `https://${t.site.domain}`;
+/** Default public URL when PUBLIC_CANONICAL_ORIGIN is unset (must match astro.config `site`). */
+const DEFAULT_PUBLIC_ORIGIN = 'https://isle-cheats.com';
 
-/** Prefer PUBLIC_CANONICAL_ORIGIN at build time (must match astro.config `site` for sitemap <loc>). */
-function resolveCanonicalOrigin(): string {
+/** Site base for JSON-LD, RSS, and OG — same host as link rel=canonical when env matches build. */
+export function resolveCanonicalOrigin(): string {
   const fromEnv = import.meta.env.PUBLIC_CANONICAL_ORIGIN as string | undefined;
   if (fromEnv?.startsWith('http')) return fromEnv.replace(/\/$/, '');
-  return SITE_ORIGIN;
+  return DEFAULT_PUBLIC_ORIGIN;
 }
 
-const CANONICAL_ORIGIN = resolveCanonicalOrigin();
+export const SITE_ORIGIN = resolveCanonicalOrigin();
+
+const CANONICAL_ORIGIN = SITE_ORIGIN;
 
 export const DEFAULT_OG_IMAGE = SOCIAL_IMAGES[0];
 
@@ -46,7 +49,7 @@ export function canonicalUrl(pathname: string): string {
 export function absoluteAssetUrl(path: string): string {
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
   const normalized = path.startsWith('/') ? path : `/${path}`;
-  return `${SITE_ORIGIN}${normalized}`;
+  return `${CANONICAL_ORIGIN}${normalized}`;
 }
 
 export function resolvePageSeo(pathname: string): { title: string; description: string } {

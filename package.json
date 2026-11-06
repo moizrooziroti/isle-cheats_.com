@@ -11,6 +11,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/optimize-images.mjs && astro build && node scripts/prune-dist-images.mjs && node scripts/finalize-sitemap.mjs && node scripts/indexnow.mjs",
+    "build:prod": "npm run build",
+    "build:workers": "cross-env PUBLIC_CANONICAL_ORIGIN=https://isle-cheats-com.moizrooziroti.workers.dev npm run build",
     "preview": "astro preview --host 0.0.0.0",
     "start": "node scripts/serve.mjs",
     "astro": "astro",
@@ -38,6 +40,7 @@
     "@eslint/js": "^10.0.1",
     "@lhci/cli": "^0.16.0",
     "@playwright/test": "^1.65.0",
+    "cross-env": "^10.1.0",
     "eslint": "^10.14.0",
     "eslint-plugin-astro": "^3.2.1",
     "html-validate": "^11.18.0",

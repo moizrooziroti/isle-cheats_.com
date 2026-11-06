@@ -4,7 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { DIST, ROOT, failGate, passGate, readText, walkDir } from './lib.mjs';
 
-const SITE = 'https://isle-cheats.com';
+const SITE =
+  process.env.PUBLIC_CANONICAL_ORIGIN?.startsWith('http')
+    ? process.env.PUBLIC_CANONICAL_ORIGIN.replace(/\/$/, '')
+    : 'https://isle-cheats.com';
 const failures = [];
 const rows = [];
 

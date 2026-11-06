@@ -8,7 +8,8 @@ import { DIST, ROOT, failGate, passGate, readText, walkDir } from './lib.mjs';
 
 const envOrigin = process.env.PUBLIC_CANONICAL_ORIGIN;
 
-let expectedOrigin = 'https://isle-cheats.com';
+const DEFAULT_ORIGIN = 'https://isle-cheats.com';
+let expectedOrigin = DEFAULT_ORIGIN;
 if (envOrigin?.startsWith('http')) {
   expectedOrigin = envOrigin.replace(/\/$/, '');
 } else if (process.env.QA_BASE_URL) {
@@ -30,9 +31,7 @@ const robotsPath = fs.existsSync(path.join(DIST, 'robots.txt'))
   ? path.join(DIST, 'robots.txt')
   : path.join(ROOT, 'public', 'robots.txt');
 const robots = readText(robotsPath);
-const robotsHasPrimarySitemap =
-  robots.includes(`Sitemap: ${expectedOrigin}/sitemap.xml`) ||
-  robots.includes('Sitemap: https://isle-cheats.com/sitemap.xml');
+const robotsHasPrimarySitemap = robots.includes(`Sitemap: ${expectedOrigin}/sitemap.xml`);
 if (!robotsHasPrimarySitemap) failures.push('robots missing sitemap line for expected origin');
 if (/Disallow:\s*\/\s*$/m.test(robots)) failures.push('robots blocks entire site');
 

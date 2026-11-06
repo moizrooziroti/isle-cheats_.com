@@ -3,11 +3,13 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import { sitemapSerialize } from './src/config/sitemap.ts';
 
+/** Default site URL (production). Override with PUBLIC_CANONICAL_ORIGIN for staging (e.g. *.workers.dev). */
+const defaultSite = 'https://isle-cheats.com';
 const site =
   typeof process.env.PUBLIC_CANONICAL_ORIGIN === 'string' &&
   process.env.PUBLIC_CANONICAL_ORIGIN.startsWith('http')
     ? process.env.PUBLIC_CANONICAL_ORIGIN.replace(/\/$/, '')
-    : 'https://isle-cheats.com';
+    : defaultSite;
 
 export default defineConfig({
   site,
