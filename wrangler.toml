@@ -1,0 +1,7 @@
+# Static Astro site — upload pre-built dist/ only. Do not add [build] or @astrojs/cloudflare
+# (Wrangler auto-config would re-run npm run build with the adapter and break finalize-sitemap).
+name = "isle-cheats-com"
+compatibility_date = "2025-11-06"
+
+[assets]
+directory = "./dist"
