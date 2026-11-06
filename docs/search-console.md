@@ -20,10 +20,10 @@ You verify the domain at your DNS provider—no HTML meta tags in the repo.
 
 | Common query intent | Edit path in `pageSeo.ts` |
 | ------------------- | ------------------------- |
-| dota 2 cheats (broad) | `/` |
-| lite / pro / elite | `/cheats/compare/`, `/cheats/lite/`, etc. |
-| map hack, scripts | `/cheats/pro/`, blog posts (titles set per article) |
-| hwid, skin changer | `/products/dota-2-cheats/utilities/` |
+| The Isle cheats (broad) | `/` |
+| product comparison | `/products/` |
+| ESP, loader, setup guides | `/blog/` (titles set per article) |
+| hwid, DMA, appeals | `/products/hwid-spoofer/`, `/products/cloud-dma/`, `/products/ugc/` |
 | purchase / refund | `/terms/`, `/contact/` |
 
 Product and blog article pages still use their own titles from content; add entries to `PAGE_SEO` only when you want a fixed override for a specific pathname.

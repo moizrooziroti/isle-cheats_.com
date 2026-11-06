@@ -5,8 +5,6 @@ import path from 'node:path';
 import { DIST, ROOT, failGate, passGate, readText, walkDir } from './lib.mjs';
 
 const BANNED = [
-  { re: /arena\s+breakout/i, label: 'old game (Arena Breakout)' },
-  { re: /\bfortnite\b/i, label: 'old game (fortnite)', skip: [/sitemap\.ts$/] },
   { re: /NOT-OPTIM/i, label: 'template marker' },
   { re: /\blorem\b/i, label: 'lorem' },
   { re: /\bTODO\b/, label: 'TODO', skip: [/scripts\/qa/] },

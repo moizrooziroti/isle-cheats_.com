@@ -24,8 +24,7 @@ export function sitemapSerialize(item: SitemapItem): SitemapItem | undefined {
     path.includes('/404') ||
     path.startsWith('/go/') ||
     path.startsWith('/forum/') ||
-    path.includes('/rss.xml') ||
-    path.startsWith('/products/fortnite-cheats')
+    path.includes('/rss.xml')
   ) {
     return undefined;
   }
