@@ -1,0 +1,107 @@
+---
+import { productPages } from '../data/products';
+import { cheatTierIcons, productCategoryIcons } from '../data/sectionIcons';
+import Icon from './icons/Icon.astro';
+import type { IconName } from './icons/types';
+import { productPath } from '../utils/path';
+import { Badge } from '@/components/starwind/badge';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/starwind/table';
+
+type CompareSlug = 'the-isle-cheats' | 'hwid-spoofer' | 'cloud-dma' | 'ugc';
+
+interface CompareRow {
+  feature: string;
+  icon: IconName;
+  'the-isle-cheats': boolean;
+  'hwid-spoofer': boolean;
+  'cloud-dma': boolean;
+  ugc: boolean;
+}
+
+interface Props {
+  rows: CompareRow[];
+  highlightSlug?: string;
+}
+
+const { rows, highlightSlug } = Astro.props;
+
+const columns = productPages.map((p) => ({
+  slug: p.slug as CompareSlug,
+  name: p.title,
+  icon:
+    p.kind === 'tier'
+      ? (cheatTierIcons[p.name] ?? 'crosshair')
+      : (productCategoryIcons[p.category ?? ''] ?? 'package'),
+  href: productPath(p.slug),
+  popular: p.slug === 'the-isle-cheats',
+}));
+---
+
+<section class="space-y-4" aria-labelledby="compare-heading">
+  <header class="section-header">
+    <p class="section-header__eyebrow">Compare</p>
+    <h2 id="compare-heading" class="section-header__title">Compare products</h2>
+    <p class="section-header__subtitle">Side-by-side look at The Isle Cheats and utilities.</p>
+  </header>
+
+  <div class="rounded-lg border border-border" tabindex="0" aria-label="Compare products">
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead class="min-w-[12rem]">Feature</TableHead>
+          {columns.map((col) => (
+            <TableHead class="min-w-[8rem] text-center">
+              <div class="flex flex-col items-center gap-2 py-2">
+                {col.popular && <Badge>Popular</Badge>}
+                <a
+                  href={col.href}
+                  class:list={[
+                    'inline-flex flex-col items-center gap-1 text-sm font-semibold hover:text-primary',
+                    highlightSlug === col.slug && 'text-primary',
+                  ]}
+                >
+                  <Icon
+                    name={col.icon}
+                    size={22}
+                    class={highlightSlug === col.slug ? 'icon-app--primary' : ''}
+                    aria-hidden="true"
+                  />
+                  {col.name}
+                </a>
+              </div>
+            </TableHead>
+          ))}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {rows.map((row) => (
+          <TableRow>
+            <TableCell class="font-medium">
+              <span class="inline-flex items-center gap-2">
+                <Icon name={row.icon} size={15} aria-hidden="true" />
+                {row.feature}
+              </span>
+            </TableCell>
+            {columns.map((col) => {
+              const included = row[col.slug];
+              return (
+                <TableCell class="text-center">
+                  <span aria-label={included ? 'Included' : 'Not included'}>
+                    <Icon name={included ? 'circleCheck' : 'x'} size={18} />
+                  </span>
+                </TableCell>
+              );
+            })}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </div>
+</section>

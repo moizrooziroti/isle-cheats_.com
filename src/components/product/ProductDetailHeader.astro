@@ -1,0 +1,26 @@
+---
+import type { ProductPage } from '../../data/products';
+import { SITE_NAME } from '../../config/site';
+import { Badge } from '@/components/starwind/badge';
+
+interface Props {
+  product: ProductPage;
+}
+
+const { product } = Astro.props;
+---
+
+<header class="product-detail-header space-y-4">
+  <div class="flex flex-wrap items-center gap-2">
+    <Badge variant="secondary">{product.badge}</Badge>
+    {product.variant === 'popular' && <Badge>Popular</Badge>}
+    {product.variant === 'limited' && <Badge variant="primary">Limited</Badge>}
+    <Badge variant="outline">The Isle</Badge>
+  </div>
+  <h1 class="max-w-3xl text-3xl font-bold normal-case leading-tight md:text-4xl">{SITE_NAME}</h1>
+  <p class="max-w-3xl text-xl font-semibold">{product.title}</p>
+  <p class="max-w-2xl text-lg leading-relaxed text-muted-foreground">{product.subtitle || product.desc}</p>
+  <p class="max-w-2xl text-sm text-primary/90">
+    Verified partner checkout · live status on this site · ESP and utilities built for The Isle on PC.
+  </p>
+</header>

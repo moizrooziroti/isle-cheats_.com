@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { resolvePageSeo } from '../config/seo';
+import { SITE_NAME } from '../config/site';
+import LegalPage from '../components/LegalPage.astro';
+import { breadcrumbSchema, webPageSchema } from '../utils/schema';
+
+const seo = resolvePageSeo('/refund-policy/');
+const sections = [
+  {
+    heading: 'Who handles the payment',
+    paragraphs: [
+      `${SITE_NAME} does not store card numbers. Checkout opens on the partner link attached to each product.`,
+      'A refund request has to go through that checkout partner. This website cannot reverse a charge it did not take.',
+    ],
+  },
+  {
+    heading: 'What to include',
+    paragraphs: [
+      'Keep the order email and the product name. Contact the partner with those details before you write to support here.',
+      'A refused refund from the partner is their decision. We will not promise a different outcome.',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    webPageSchema({ name: seo.title, description: seo.description, url: '/refund-policy/' }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Refund Policy', path: '/refund-policy/' },
+    ]),
+  ]}
+>
+  <LegalPage title="Refund Policy" description={seo.description} breadcrumbLabel="Refund Policy" sections={sections} />
+</BaseLayout>

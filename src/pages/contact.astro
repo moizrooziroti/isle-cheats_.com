@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t } from '../i18n';
+import { resolvePageSeo } from '../config/seo';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ContactSupportSection from '../components/ContactSupportSection.astro';
+import { breadcrumbSchema, webPageSchema } from '../utils/schema';
+
+const seo = resolvePageSeo('/contact/');
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    webPageSchema({
+      name: t.support.title,
+      description: t.support.subtitle,
+      url: '/contact/',
+    }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Contact', path: '/contact/' },
+    ]),
+  ]}
+>
+  <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact/' }]} />
+  <ContactSupportSection />
+</BaseLayout>

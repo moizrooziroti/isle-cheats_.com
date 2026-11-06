@@ -1,0 +1,53 @@
+---
+import { t } from '../i18n';
+import { checkoutForSlug } from '../config/checkout';
+import Icon from './icons/Icon.astro';
+
+const buyUrl = checkoutForSlug('the-isle-cheats');
+const ui = t.ui;
+const slogansJson = JSON.stringify(ui.buyPromptSlogans);
+---
+
+<div class="buy-prompt" data-buy-prompt-root data-buy-prompt-slogans={slogansJson}>
+  <button
+    type="button"
+    class="buy-prompt__tab"
+    data-buy-prompt-tab
+    hidden
+    aria-expanded="false"
+    aria-controls="buy-prompt-panel"
+  >
+    <span class="buy-prompt__tab-dot" aria-hidden="true"></span>
+    {ui.buyPromptTab}
+  </button>
+
+  <aside
+    id="buy-prompt-panel"
+    class="buy-prompt__panel"
+    data-buy-prompt-panel
+    role="dialog"
+    aria-labelledby="buy-prompt-kicker"
+    aria-describedby="buy-prompt-slogan"
+    hidden
+  >
+    <div class="buy-prompt__card">
+      <button type="button" class="buy-prompt__close" data-buy-prompt-close aria-label={ui.buyPromptClose}>
+        <Icon name="x" size={16} />
+      </button>
+      <p id="buy-prompt-slogan" class="buy-prompt__slogan" data-buy-prompt-slogan>
+        {ui.buyPromptSlogans[0]}
+      </p>
+      <p id="buy-prompt-kicker" class="buy-prompt__kicker">{ui.buyPromptKicker}</p>
+      <p class="buy-prompt__sub">{ui.buyPromptSub}</p>
+      <a
+        class="buy-prompt__cta"
+        href={buyUrl}
+        rel="sponsored noopener nofollow"
+        target="_blank"
+      >
+        {ui.buyPromptCta}
+        <Icon name="arrowRight" size={15} aria-hidden="true" />
+      </a>
+    </div>
+  </aside>
+</div>

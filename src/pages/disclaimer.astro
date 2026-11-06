@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { resolvePageSeo } from '../config/seo';
+import { SITE_NAME } from '../config/site';
+import LegalPage from '../components/LegalPage.astro';
+import { breadcrumbSchema, webPageSchema } from '../utils/schema';
+
+const seo = resolvePageSeo('/disclaimer/');
+const sections = [
+  {
+    heading: 'Terms of service',
+    paragraphs: [
+      `Tools listed on ${SITE_NAME} are third-party software. Using them may violate the game's terms of service.`,
+      'You are responsible for that choice. This site does not claim the tools are undetected, fully safe, or free of account penalties.',
+    ],
+  },
+  {
+    heading: 'Not the game studio',
+    paragraphs: [
+      `${SITE_NAME} is not the official game, the publisher, or the anti-cheat vendor.`,
+      'Feature lists describe what the partner page offers. They are not a promise that every module is available after a patch.',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    webPageSchema({ name: seo.title, description: seo.description, url: '/disclaimer/' }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Disclaimer', path: '/disclaimer/' },
+    ]),
+  ]}
+>
+  <LegalPage title="Disclaimer" description={seo.description} breadcrumbLabel="Disclaimer" sections={sections} />
+</BaseLayout>
